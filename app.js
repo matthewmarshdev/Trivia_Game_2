@@ -3,18 +3,29 @@ function populate(){
     showScores();
   } else {
     var theElement = $("#question");
+    theElement.empty();
     theElement.append(quiz.getQuestionIndex().text);
 
     var choices = quiz.getQuestionIndex().choices;
     for (var i = 0; i < choices.length; i++) {
       var theElement = $("#choice" + i);
+      theElement.empty();
       theElement.append(choices[i]);
-      guess("btn" + i, choices[i]);
+      //guess("#btn" + i, choices[i]);
     }
   }
 };
 
-function guess(id, guess) {
+$("button").on("click", function(){
+  console.log('in here3');
+  var guess = $(this).text();
+  console.log(guess);
+  quiz.guess(guess);
+  populate();
+});
+
+
+/**function guess(id, guess) {
   var button = $(id);
    console.log("in here");
   button.onclick = function() {
@@ -22,7 +33,7 @@ function guess(id, guess) {
     quiz.guess(guess);
     populate();
   }
-}
+}**/
 
 function showScores() {
   var gameOverHTML = "<h1> Result </h1>";
